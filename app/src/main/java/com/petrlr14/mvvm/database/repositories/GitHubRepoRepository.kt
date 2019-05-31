@@ -7,6 +7,10 @@ import com.petrlr14.mvvm.database.entities.GitHubRepo
 
 class GitHubRepoRepository (private val repoDao:GitHubDAO){
 
+    fun retrieveRepoAsync(user: String): Deferred<Response<List<GitHubRepo>>>{
+        return GithubService.getRetrofit().getRepos(user)
+    }
+
     @WorkerThread
     suspend fun insert(repo:GitHubRepo){
         repoDao.insert(repo)
